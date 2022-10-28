@@ -1,22 +1,52 @@
 <template>
   <div>
-    <el-menu router class="el-menu-demo" mode="horizontal">
-      <el-menu-item index="1">Processing Center</el-menu-item>
-      <el-sub-menu index="2">
-        <template #title>Workspace</template>
-        <el-menu-item index="2-1">item one</el-menu-item>
-        <el-menu-item index="2-2">item two</el-menu-item>
-        <el-menu-item index="2-3">item three</el-menu-item>
-        <el-sub-menu index="2-4">
-          <template #title>item four</template>
-          <el-menu-item index="2-4-1">item one</el-menu-item>
-          <el-menu-item index="2-4-2">item two</el-menu-item>
-          <el-menu-item index="2-4-3">item three</el-menu-item>
-        </el-sub-menu>
-      </el-sub-menu>
-      <el-menu-item index="3" disabled>Info</el-menu-item>
-      <el-menu-item index="4">Orders</el-menu-item>
+    <el-menu class="header" mode="horizontal" :ellipsis="false" @select="handleSelect" text-color="#000" active-text-color="#000">
+      <div class="logo">MIDIPiano</div>
+      <div class="flex-grow" />
+      <div class="dark-switch"><DarkLightSwitch /></div>
+      <div class="lang-switch">
+        <LanguageSwitch />
+      </div>
     </el-menu>
   </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import LanguageSwitch from './LanguageSwitch.vue'
+
+const handleSelect = (index: string) => {
+  console.log(index)
+}
+</script>
+<style lang="scss" scoped>
+.header {
+  background: transparent;
+  height: 75px;
+}
+.logo {
+  font-size: 30px;
+  color: var(--font-color);
+  display: flex;
+  align-items: center;
+  margin-left: 50px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.dark-switch {
+  display: flex;
+  align-items: center;
+  padding: 30px;
+}
+.el-menu--horizontal :deep(.el-menu-item.is-active) {
+  border: 0;
+}
+.el-menu {
+  border: 0;
+}
+.lang-switch {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+</style>

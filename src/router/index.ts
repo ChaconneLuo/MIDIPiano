@@ -6,7 +6,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'index',
+      redirect: '/main'
+    },
+    {
+      path: '/main',
+      name: 'Main',
       component: HomePage
     }
   ]
