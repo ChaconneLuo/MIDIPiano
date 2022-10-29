@@ -1,3 +1,6 @@
 export default {
-  lang: 'English'
+  lang: 'English',
+  test: 'This is Test Text',
+  midi: 'MIDI File',
+  uploadMsg: 'Drop file here or click to upload'
 }

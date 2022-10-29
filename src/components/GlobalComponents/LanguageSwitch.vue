@@ -1,10 +1,10 @@
 <template>
   <el-dropdown @command="switchLanguage">
-    <div class="icon">
+    <div class="flex justify-center mx-8 flex-col">
       <LanguageIcon style="height: 35px; width: 35px" />
     </div>
     <template #dropdown>
-      <el-dropdown-menu @change="switchLanguage" :teleported="false">
+      <el-dropdown-menu @change="switchLanguage">
         <el-dropdown-item v-for="locale in availableLocales" :key="locale" :command="locale">{{ languageComputing(locale) }}</el-dropdown-item>
       </el-dropdown-menu>
     </template>
@@ -14,7 +14,7 @@
 import { useI18n } from 'vue-i18n'
 import { useLocalStorage } from '@vueuse/core'
 import { computed } from 'vue'
-import LanguageIcon from '../icon/LanguageIcon.vue'
+import LanguageIcon from '../Icons/LanguageIcon.vue'
 
 const { availableLocales, locale, getLocaleMessage } = useI18n()
 
@@ -37,12 +37,4 @@ const switchLanguage = (lang: string) => {
 }
 </script>
 
-<style lang="scss" scoped>
-.icon {
-  display: flex;
-  justify-content: center;
-  padding-left: 10px;
-  padding-right: 20px;
-  flex-direction: column;
-}
-</style>
+<style scoped></style>

@@ -23,7 +23,7 @@ const isDark = useDark({
 const toggleDark = useToggle(isDark)
 const theme = ref<boolean>(useLocalStorage('useDark', 'auto').value == 'dark')
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .el-switch {
   height: 20px;
   width: 40px;

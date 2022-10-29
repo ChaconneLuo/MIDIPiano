@@ -1,54 +1,36 @@
 <template>
   <div>
-    <el-container>
-      <el-header>
+    <el-container class="fixed z-50 w-screen">
+      <el-header class="p-0">
         <Header />
       </el-header>
     </el-container>
   </div>
-  <div class="main">
-    <div class="topic"></div>
-    <div class="triangle"></div>
-    <div class="file-upload"></div>
+  <div class="flex">
+    <div class="inline h-screen w-1/2 bg-mainBgLight dark:bg-mainBgDark">
+      <div class="flex justify-center flex-col h-full mx-auto text-center">
+        <h1 class="text-3xl text-logoFontLight dark:text-logoFontDark">{{ t('test') }}</h1>
+      </div>
+    </div>
+    <div
+      class="triangle inline z-30 overflow-hidden border-l-mainBgLight border-b-mainBgLight dark:border-l-mainBgDark dark:border-b-mainBgDark"
+    ></div>
+    <div class="fixed right-0 z-20 w-1/2 h-screen bg-fileBgLight dark:bg-fileBgDark">
+      <div class="h-full flex flex-col justify-center"><FileUpload /></div>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
 import Header from '../components/GlobalComponents/Header.vue'
+import FileUpload from '@/components/FileComponents/FileUpload.vue'
+const { t } = useI18n()
 </script>
-<style lang="scss" scoped>
-@use '../assets/css/global.scss' as *;
-.el-header {
-  padding: 0;
-}
-.el-container {
-  position: fixed;
-  z-index: 100;
-  width: 100vw;
-}
-.main {
-  display: flex;
-}
-.topic {
-  display: inline;
-  width: 50vw;
-  height: 100vh;
-  background-color: $mainPageBackgroundColor;
-}
+<style scoped>
 .triangle {
-  display: inline;
-  z-index: 50;
-  overflow: hidden;
-  border-left: 7.5vw solid $mainPageBackgroundColor;
+  border-left: 7.5vw solid #f1fafa;
   border-right: 7.5vw solid transparent;
   border-top: 50vh solid transparent;
-  border-bottom: 50vh solid $mainPageBackgroundColor;
-}
-
-.file-upload {
-  position: fixed;
-  right: 0;
-  width: 50vw;
-  height: 100vh;
-  background-color: $fileUploadBackgroundColor;
+  border-bottom: 50vh solid #f1fafa;
 }
 </style>

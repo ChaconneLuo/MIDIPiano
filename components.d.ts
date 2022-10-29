@@ -21,10 +21,13 @@ declare module '@vue/runtime-core' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
+    FileUpload: typeof import('./src/components/FileComponents/FileUpload.vue')['default']
     Header: typeof import('./src/components/GlobalComponents/Header.vue')['default']
-    LanguageIcon: typeof import('./src/components/icon/LanguageIcon.vue')['default']
+    LanguageIcon: typeof import('./src/components/Icons/LanguageIcon.vue')['default']
     LanguageSwitch: typeof import('./src/components/GlobalComponents/LanguageSwitch.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    UploadFileIcon: typeof import('./src/components/Icons/UploadFileIcon.vue')['default']
   }
 }

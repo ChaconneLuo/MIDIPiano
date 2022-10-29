@@ -4,9 +4,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
-import 'virtual:svg-icons-register'
 
-import './assets/css/global.scss'
+import './assets/css/index.css'
 
 const app = createApp(App)
 
