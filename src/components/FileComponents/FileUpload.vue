@@ -1,5 +1,5 @@
 <template>
-  <el-upload ref="upload" class="w-1/3 translate-x-20 mx-auto" drag accept=".midi" :limit="1" auto-upload :on-change="handleChange">
+  <el-upload ref="upload" class="w-1/3 translate-x-20 mx-auto" drag accept=".mid,.midi" :limit="1" auto-upload :on-change="handleChange">
     <div class="flex justify-center mx-8 flex-row">
       <UploadFileIcon style="height: 80px; width: 80px" />
     </div>

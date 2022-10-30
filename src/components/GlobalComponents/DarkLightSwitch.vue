@@ -21,7 +21,7 @@ const isDark = useDark({
   valueLight: 'light'
 })
 const toggleDark = useToggle(isDark)
-const theme = ref<boolean>(useLocalStorage('useDark', 'auto').value == 'dark')
+const theme = ref<boolean>(useLocalStorage('useDark', 'auto').value === 'dark')
 </script>
 <style scoped>
 .el-switch {

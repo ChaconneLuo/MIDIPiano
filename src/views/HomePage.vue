@@ -16,7 +16,8 @@
       class="triangle inline z-30 overflow-hidden border-l-mainBgLight border-b-mainBgLight dark:border-l-mainBgDark dark:border-b-mainBgDark"
     ></div>
     <div class="fixed right-0 z-20 w-1/2 h-screen bg-fileBgLight dark:bg-fileBgDark">
-      <div class="h-full flex flex-col justify-center"><FileUpload /></div>
+      <canvas class="absolute h-full w-full" id="canvas"></canvas>
+      <div class="h-full z-50 flex flex-col justify-center"><FileUpload /></div>
     </div>
   </div>
 </template>
@@ -24,7 +25,33 @@
 import { useI18n } from 'vue-i18n'
 import Header from '../components/GlobalComponents/Header.vue'
 import FileUpload from '@/components/FileComponents/FileUpload.vue'
+import { getCanvasElementById } from '@/utils/CanvasUtil'
+import DrawInCanvas from '@/utils/DrawInCanvas'
+import { onMounted, ref, watch } from 'vue'
+import { useOptionStore } from '../stores/option'
+import { useLocalStorage } from '@vueuse/core'
+
 const { t } = useI18n()
+onMounted(() => {
+  let canvasElement = getCanvasElementById('canvas')
+  if (!canvasElement) {
+    return
+  }
+  const draw = new DrawInCanvas(ref<HTMLCanvasElement>(canvasElement), useOptionStore())
+  watch(
+    () => useLocalStorage('useDark', 'auto').value,
+    (newValue) => {
+      console.log('switch')
+      if (newValue === 'dark') {
+        draw.switch('dark')
+      } else {
+        draw.switch('light')
+      }
+    },
+    { immediate: true }
+  )
+  draw.draw()
+})
 </script>
 <style scoped>
 .triangle {
