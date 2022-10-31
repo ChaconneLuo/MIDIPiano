@@ -12,7 +12,7 @@
 <script lang="ts" setup>
 import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
 import { Sunny, Moon } from '@element-plus/icons-vue'
-import { ref } from 'vue'
+import {ref, watch} from 'vue'
 
 const isDark = useDark({
   selector: 'body',
@@ -21,7 +21,7 @@ const isDark = useDark({
   valueLight: 'light'
 })
 const toggleDark = useToggle(isDark)
-const theme = ref<boolean>(useLocalStorage('useDark', 'auto').value === 'dark')
+const theme = ref<boolean>(useLocalStorage('useDark', 'light').value === 'dark')
 </script>
 <style scoped>
 .el-switch {

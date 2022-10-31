@@ -17,7 +17,9 @@
     ></div>
     <div class="fixed right-0 z-20 w-1/2 h-screen bg-fileBgLight dark:bg-fileBgDark">
       <canvas class="absolute h-full w-full" id="canvas"></canvas>
-      <div class="h-full z-50 flex flex-col justify-center"><FileUpload /></div>
+      <div class="h-full z-50 flex flex-col justify-center">
+        <FileUpload />
+      </div>
     </div>
   </div>
 </template>
@@ -39,16 +41,15 @@ onMounted(() => {
   }
   const draw = new DrawInCanvas(ref<HTMLCanvasElement>(canvasElement), useOptionStore())
   watch(
-    () => useLocalStorage('useDark', 'auto').value,
+    () => useLocalStorage('useDark', 'light'),
     (newValue) => {
-      console.log('switch')
-      if (newValue === 'dark') {
+      if (newValue.value === 'dark') {
         draw.switch('dark')
       } else {
         draw.switch('light')
       }
     },
-    { immediate: true }
+    { immediate: true, deep: true }
   )
   draw.draw()
 })

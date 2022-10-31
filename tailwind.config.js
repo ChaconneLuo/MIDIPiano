@@ -16,7 +16,9 @@ module.exports = {
       fileBgLight: '#ffffff',
       fileBgDark: '#060606',
       logoFontLight: '#060606',
-      logoFontDark: '#ffffff'
+      logoFontDark: '#ffffff',
+      buttonBgLight: '#0B99D8',
+      buttonBgDark: '#F9A123'
     },
     fontFamily: {
       gill: ['Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', 'sans - serif']

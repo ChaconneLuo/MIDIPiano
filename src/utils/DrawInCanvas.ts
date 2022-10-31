@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 import { CanvasRoundRect } from './CanvasUtil'
-import type { Option } from './Options'
+import type { Options } from '@/types/Options'
 
 interface Ball {
   x: number
@@ -14,11 +14,11 @@ export default class DrawInCanvas {
   private canvas: Ref<HTMLCanvasElement>
   private ctx: CanvasRenderingContext2D
   private balls: Array<Ball>
-  private options: Option
+  private options: Options
   private gradient: CanvasGradient
   private color: string
   private border: boolean
-  constructor(canvas: Ref<HTMLCanvasElement>, options: Option) {
+  constructor(canvas: Ref<HTMLCanvasElement>, options: Options) {
     this.canvas = canvas
     this.options = options
     this.color = this.options.LightPieceColor

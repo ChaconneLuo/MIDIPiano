@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Options } from '@/utils/Options'
+import type { Options } from '@/types/Options'
 
 export const useOptionStore = defineStore('Option', {
   state: (): Options => {
