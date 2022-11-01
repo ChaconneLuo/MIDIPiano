@@ -3,5 +3,6 @@ export default {
   test: '这是一段测试文本',
   midi: 'MIDI 文件',
   uploadMsg: '拖动文件到此或点击上传',
-  gotoPiano: '直接演奏'
+  gotoPiano: '直接演奏',
+  replaceBackground: '更换背景'
 }

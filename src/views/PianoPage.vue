@@ -1,4 +1,5 @@
 <template>
+  <PlaySlider />
   <div class="h-screen w-screen bg-fixed bg-no-repeat bg-center overflow-hidden">
     <img :src="loadBackground()" alt="" />
   </div>
@@ -8,6 +9,7 @@
 import { useLocalStorage } from '@vueuse/core'
 import { getBackgroundFromLocalStorage } from '@/utils/FileUtil'
 import defaultBackground from '@/assets/img/defaultBackground.png'
+import PlaySlider from '@/components/PianoComponents/PlaySlider.vue'
 
 const loadBackground = () => {
   const background = useLocalStorage('background', 'undefined').value
