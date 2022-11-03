@@ -8,6 +8,9 @@ module.exports = {
       },
       height: {
         '50vh': '50vh'
+      },
+      spacing: {
+        '1/5': '20%'
       }
     },
     colors: {
