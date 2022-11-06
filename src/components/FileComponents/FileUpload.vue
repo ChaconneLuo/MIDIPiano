@@ -40,7 +40,7 @@ const onChange: UploadProps['onChange'] = (file: UploadFile) => {
   })
 }
 const goPiano = () => {
-  router.push('/midi')
+  router.push('/piano')
 }
 </script>
 

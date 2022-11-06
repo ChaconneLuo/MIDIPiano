@@ -16,8 +16,8 @@ const router = createRouter({
       component: HomePage
     },
     {
-      path: '/midi',
-      name: 'MIDIPlayer',
+      path: '/piano',
+      name: 'PianoPlayer',
       component: PianoPage
     }
   ]

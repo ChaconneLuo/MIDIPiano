@@ -1,34 +1,18 @@
-export interface WhiteKeyProps {
-  whiteKeyWidth: number
-  pos_x: number
-  data: undefined | Array<BlockNote>
-  id: number
-  sound: any
+import type { Player } from 'soundfont-player'
+
+export interface KeyProps {
+  noteId: string
+  keyWidth: number
   height: number
+  posX: number
   color: 'white' | 'black'
+  sound: Sound
 }
 
-export interface AllKeysProps {
-  wh: number
-  whiteKeyWidth: number
-  data: Array<BlockNote>
-  sound: any
-  height: number
+export interface PianoProps {
+  sound: Sound
 }
 
-export interface BlockNote {
-  color: string
-  width: number
-  NoteNumber: number
-  Velocity: number
-  pos_y: number
-  pos_x: number
-  height?: number
-  creationTime: number
-  pauseTime?: number
-  playingTime?: number
-  duration: number
-  detectTime?: number
-  timeWasTaken?: boolean
-  wasDetected: boolean
+export interface Sound {
+  player: Player
 }

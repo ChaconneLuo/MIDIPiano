@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 import { CanvasRoundRect } from './CanvasUtil'
-import type { Options } from '@/types/Options'
+import type { Configs } from '@/types/Configs'
 
 interface Ball {
   x: number
@@ -14,14 +14,14 @@ export default class DrawInCanvas {
   private canvas: Ref<HTMLCanvasElement>
   private ctx: CanvasRenderingContext2D
   private balls: Array<Ball>
-  private options: Options
+  private configs: Configs
   private gradient: CanvasGradient
   private color: string
   private border: boolean
-  constructor(canvas: Ref<HTMLCanvasElement>, options: Options) {
+  constructor(canvas: Ref<HTMLCanvasElement>, configs: Configs) {
     this.canvas = canvas
-    this.options = options
-    this.color = this.options.LightPieceColor
+    this.configs = configs
+    this.color = this.configs.lightPieceColor
     this.border = false
     this.ctx = canvas.value?.getContext('2d')!
     this.canvas.value!.height = window.innerHeight + 300
@@ -36,9 +36,9 @@ export default class DrawInCanvas {
       this.canvas.value!.width * Math.cos((90 / 180) * Math.PI),
       this.canvas.value!.height * Math.sin((90 / 180) * Math.PI)
     )
-    const step = 1 / this.options.PlaySpeed
+    const step = 1 / this.configs.playSpeed
     let current_step = 0
-    this.options.ColorList.forEach((color: string) => {
+    this.configs.colorList.forEach((color: string) => {
       this.gradient.addColorStop(current_step, color)
       current_step += step
     })
@@ -80,7 +80,7 @@ export default class DrawInCanvas {
           ball.start_time = Date.now() + 500
         }
         this.ctx.beginPath()
-        this.ctx.shadowColor = this.options.ShadowColor
+        this.ctx.shadowColor = this.configs.shadowColor
         CanvasRoundRect(
           this.ctx,
           color,
@@ -88,7 +88,7 @@ export default class DrawInCanvas {
           Math.floor(ball.y),
           Math.floor(ball.size),
           Math.floor(ball.size * 4),
-          this.options.BlockRadius,
+          this.configs.blockRadius,
           border
         )
         return ball
@@ -104,17 +104,17 @@ export default class DrawInCanvas {
   public switch(colorMode: string): void {
     switch (colorMode) {
       case 'dark': {
-        this.color = this.options.DarkPieceColor
+        this.color = this.configs.darkPieceColor
         this.border = true
         break
       }
       case 'light': {
-        this.color = this.options.LightPieceColor
+        this.color = this.configs.lightPieceColor
         this.border = false
         break
       }
       case 'auto': {
-        this.color = this.options.LightPieceColor
+        this.color = this.configs.lightPieceColor
         this.border = false
         break
       }

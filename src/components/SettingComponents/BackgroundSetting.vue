@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-upload ref="backgroundUpload" :limit="1" auto-upload :show-file-list="false" :on-change="onChange">
+    <el-upload ref="backgroundUpload" :limit="1" :show-file-list="false" :on-change="onChange">
       <template #trigger>
         <el-button class="bg-buttonBgLight" type="primary" round :bg="true">
           {{ t('replaceBackground') }}
@@ -12,14 +12,20 @@
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import type { UploadInstance, UploadProps } from 'element-plus'
+import type { UploadFile, UploadFiles, UploadInstance, UploadProps } from 'element-plus'
 import { ref } from 'vue'
+import { fileToBase64 } from '@/utils/FileUtil'
+import { useLocalStorage } from '@vueuse/core'
 
 const { t } = useI18n()
 
 const upload = ref<UploadInstance>()
 
-const onChange: UploadProps['onChange'] = () => {}
+const onChange: UploadProps['onChange'] = (file: UploadFile) => {
+  fileToBase64(file.raw).then((res) => {
+    useLocalStorage('background', '').value = res
+  })
+}
 </script>
 
 <style scoped></style>

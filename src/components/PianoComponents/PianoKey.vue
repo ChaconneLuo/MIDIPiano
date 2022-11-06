@@ -1,63 +1,84 @@
 <template>
-  <div
-    v-if="props.color === 'white'"
-    class="white_key"
-    :id="props.id"
-    :style="{
-      position: 'absolute',
-      width: props.whiteKeyWidth + 'px',
-      height: props.height + 'px',
-      left: props.pos_x + 'px',
-      background: background
-    }"
-  ></div>
-  <div
-    v-else
-    :id="props.id"
-    class="black_key"
-    :style="{
-      position: 'absolute',
-      width: props.whiteKeyWidth / 1.8 + 'px',
-      height: props.height / 1.6 + 'px',
-      left: props.pos_x + 'px',
-      background: background
-    }"
-  ></div>
+  <div>
+    <div
+      v-if="props.color === 'white'"
+      class="white_key"
+      v-on:mousedown.self="keyDown"
+      v-on:mouseover.self="keyMove"
+      v-on:mouseout.self="keyDefault"
+      :id="props.noteId"
+      :style="{
+        position: 'absolute',
+        width: props.keyWidth + 'px',
+        height: props.height + 'px',
+        left: props.posX + 'px',
+        background: background
+      }"
+    ></div>
+    <div
+      v-else
+      class="black_key"
+      v-on:mousedown.self="keyDown"
+      v-on:mouseover.self="keyMove"
+      v-on:mouseout.self="keyDefault"
+      :id="props.noteId"
+      :style="{
+        position: 'absolute',
+        width: props.keyWidth / 1.8 + 'px',
+        height: props.height / 1.6 + 'px',
+        left: props.posX + 'px',
+        background: background
+      }"
+    ></div>
+  </div>
 </template>
-
 <script lang="ts" setup>
-import { defineProps, onMounted, ref } from 'vue'
-import type { BlockNote } from '@/types/Piano'
+import { onMounted, ref } from 'vue'
+import type { Sound } from '@/types/Piano'
+import { useKeyStore } from '@/stores/keyStatus'
 
-interface WhiteKeyProps {
-  whiteKeyWidth: number
-  pos_x: number
-  data: undefined | Array<BlockNote>
-  id: number
-  sound: any
+interface KeyProps {
+  noteId: string
+  keyWidth: number
   height: number
+  posX: number
   color: 'white' | 'black'
+  sound: Sound
 }
 
-let props = defineProps<WhiteKeyProps>()
-let background = ref<string>(props.color)
+const props = defineProps<KeyProps>()
+const keyStatus = useKeyStore()
+const getColor = () => {
+  return props.color === 'white' ? '#fffff0' : '#000000'
+}
+const getTriggerColor = () => {
+  return props.color === 'white' ? '#FACC94' : '#75C3ED'
+}
+const background = ref<string>(getColor())
+const keyTrigger = () => {
+  background.value = getTriggerColor()
+  props.sound.player.play(props.noteId)
+}
+const keyDown = () => {
+  keyStatus.keyDown = true
+  keyTrigger()
+}
+const keyMove = () => {
+  if (keyStatus.keyDown) {
+    keyTrigger()
+  }
+}
+const keyDefault = () => {
+  background.value = getColor()
+}
+const keyUp = () => {
+  keyStatus.keyDown = false
+  background.value = getColor()
+}
 onMounted(() => {
-  const defaultBackground: string = props.color! === 'white' ? '#fffff0' : '#000000'
-  const wasDetectedBackground: string = '#5085f8'
-  // props.data!.map((event) => {
-  //   if (event.NoteNumber === props.id) {
-  //     if (event.wasDetected) {
-  //       background.value = wasDetectedBackground
-  //       props.sound && props.sound.instrument.play(props.id).stop(props.sound.ac.currentTime + event.duration / 1000)
-  //     } else {
-  //       background.value = defaultBackground
-  //     }
-  //   }
-  //   return null
-  // })
+  addEventListener('mouseup', keyUp)
 })
 </script>
-
 <style scoped>
 .white_key {
   border: 1px solid black;

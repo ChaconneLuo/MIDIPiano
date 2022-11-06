@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia'
-import type { Options } from '@/types/Options'
+import type { Configs } from '@/types/Configs'
 
 export const useOptionStore = defineStore('Option', {
-  state: (): Options => {
+  state: (): Configs => {
     return {
-      PlaySpeed: 15,
-      ColorList: ['#d0b3df'],
-      DarkPieceColor: '#8EF971',
-      LightPieceColor: '#0DA8D8',
-      ShadowColor: '#000',
-      BlockRadius: 10
+      playSpeed: 15,
+      colorList: ['#d0b3df'],
+      darkPieceColor: '#8EF971',
+      lightPieceColor: '#0DA8D8',
+      shadowColor: '#000',
+      blockRadius: 10
     }
   }
 })
